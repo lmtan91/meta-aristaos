@@ -1,3 +1,0 @@
-export BB_ENV_EXTRAWHITE="$BB_ENV_EXTRAWHITE ac_cv_func_malloc_0_nonnull ac_cv_realloc_0_nonnull"
-export ac_cv_func_malloc_0_nonnull="yes"
-export ac_cv_func_realloc_0_nonnull="yes"

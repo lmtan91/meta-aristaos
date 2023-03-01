@@ -40,7 +40,7 @@ export LDFLAGS_SL = "${LDFLAGS}"
 
 inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d
 
-enable_pam = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+enable_pam = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
 PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"
