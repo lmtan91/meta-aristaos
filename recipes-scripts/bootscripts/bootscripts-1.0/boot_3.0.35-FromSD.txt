@@ -1,0 +1,15 @@
+
+echo "### Set GPIO Pin for Atmel Controller";
+gpio clear 130;
+echo "### Confirming SD Card is present...";
+mmc dev 0;
+if mmc rescan;
+        then set device /dev/mmcblk0p1;
+        else echo "### SD card not found";
+        exit;
+fi;
+echo "### Set Kernel boot arguments...";
+set bootargs console=ttymxc1,115200 root=${device} rootwait rw fixrtc;
+echo "### Load uImage and boot...";
+ext2load mmc 0:1 0x10800000 /boot/uImage;
+bootm 0x10800000;

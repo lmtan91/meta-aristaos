@@ -1,0 +1,11 @@
+
+echo == Set Network Addresses ==
+set serverip 10.10.1.91
+echo == Loading U-Boot 2013 to RAM ==
+dhcp 0x10800000 /u-boot_2013.imx
+echo == Install U-Boot 2013 ==
+sf probe 1
+sf erase 0 0xc0000
+sf write 0x10800000 0x400 $filesize
+echo == Reset system ==
+reset

@@ -1,0 +1,46 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          auto-run-once
+# Required-Start:
+# Required-Stop:
+# X-Start-Before:
+# X-Stop-After:
+# Default-Start:     3 4 5
+# Default-Stop:
+# chkconfig: 345 99 01
+# Short-Description: Run commands that should be run once, including logging.
+# Description:
+#
+### END INIT INFO
+set -e
+start(){
+	RUN_SCRIPT=/run-once.sh
+	LOG_DIRECTORY=/var/log/run-once
+	if [ ! -d $LOG_DIRECTORY ]
+	then
+	    mkdir -p $LOG_DIRECTORY
+	fi
+
+	if [ -f $RUN_SCRIPT -a -x $RUN_SCRIPT ]
+	then
+	    RUN_DATE=`date +%Y%m%d-%M%H%S`
+	    mv $RUN_SCRIPT ${LOG_DIRECTORY}/run-once-${RUN_DATE}.script
+	    ${LOG_DIRECTORY}/run-once-${RUN_DATE}.script > ${LOG_DIRECTORY}/run-once-${RUN_DATE}.log
+	    chmod ugo-x ${LOG_DIRECTORY}/run-once-${RUN_DATE}.script
+	fi
+}
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                ;;
+        restart)
+                ;;
+        status)
+                ;;
+        *)
+                echo "Usage: /etc/init.d/auto-run-once start"
+                exit 1
+esac
+

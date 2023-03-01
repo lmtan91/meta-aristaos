@@ -1,0 +1,10 @@
+echo "### Set Network Addresses...";
+set serverip 10.10.1.91;
+set script_addr 0x100000;
+echo "### Loading Arista First Install script...";
+dhcp ${script_addr} /arista_first_install.scr;
+echo "### Run Arista First Install script...";
+source ${script_addr};
+echo "### Reset system...";
+reset;
+

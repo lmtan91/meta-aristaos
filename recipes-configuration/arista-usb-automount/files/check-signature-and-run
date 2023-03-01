@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	PUBLIC_KEY=public-key.pub
+else
+	PUBLIC_KEY=$1
+fi
+
+TEMP=/tmp
+mkdir -p $TEMP
+base64 -d signed-iv-and-start.sh.base64 > $TEMP/signed-iv-and-start.sh.bin
+head --bytes 512 $TEMP/signed-iv-and-start.sh.bin > $TEMP/signature.bin
+tail --bytes +513 $TEMP/signed-iv-and-start.sh.bin > $TEMP/iv-and-start.sh.bin
+openssl dgst -sha256 -verify "${PUBLIC_KEY}" -signature $TEMP/signature.bin $TEMP/iv-and-start.sh.bin
+if [ $? -ne 0 ]; then
+	echo "UNABLE to verify payload"
+	exit 1
+fi 
+head --bytes 16 $TEMP/iv-and-start.sh.bin > $TEMP/iv.bin
+tail --bytes +17 $TEMP/iv-and-start.sh.bin > $TEMP/start.sh.bin
+IV=`hexdump -v -e '/1 "%02X"' $TEMP/iv.bin`
+KEY=`base64 -d encryption.key| hexdump -v -e '/1 "%02X"'`
+openssl aes-256-ctr -d -in $TEMP/start.sh.bin -iv ${IV} -K ${KEY} | base64 -d > start.sh
+echo "Running:"
+cat start.sh
+chmod +x start.sh
+./start.sh
+

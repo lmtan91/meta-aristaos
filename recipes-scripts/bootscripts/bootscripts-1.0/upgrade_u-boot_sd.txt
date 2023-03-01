@@ -1,0 +1,9 @@
+echo "### Set Network Addresses..." 
+set serverip 10.10.1.91 
+set script_addr 0x10800000
+echo "### Loading U-Boot Upgrade script..." 
+dhcp ${script_addr} /upgrade_u-boot.scr 
+echo "### Run U-Boot Upgrade script..." 
+source ${script_addr} 
+echo "### Reset system..." 
+reset 

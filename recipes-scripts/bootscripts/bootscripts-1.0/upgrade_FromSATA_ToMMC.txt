@@ -1,0 +1,15 @@
+
+echo == Loading Partition Table Image to RAM
+sata init
+ext2load sata 0:1 0x10800000 /updates/images/mmcpart.img
+echo == Writing Partition Table Image to Internal Memory ==
+mmc dev 1
+mmc write 0x10800000 0x0 0x800
+mmc rescan
+echo == Loading rootfs Image to RAM ==
+ext2load sata 0:1 0x10800000 /updates/images/arista-image-cgtqmx6.ext3
+echo == Writing rootfs Image to Internal Memory ==
+mmc dev 1
+mmc write 0x10800000 0x800 0x100000
+echo == Reset system ==
+reset

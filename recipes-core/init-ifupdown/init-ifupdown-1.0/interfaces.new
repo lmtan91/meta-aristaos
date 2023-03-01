@@ -1,0 +1,19 @@
+# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+ 
+# Loopback
+auto lo
+iface lo inet loopback
+
+# Wired interfaces
+auto eth0
+iface eth0 inet dhcp
+# iface eth0 inet static
+# address 10.10.1.1
+# netmask 255.0.0.0
+# gateway 10.10.1.0
+
+auto eth0:0
+iface eth0:0 inet static
+address 169.254.$(( ( RANDOM % 254 ) + 1 )).$(( ( RANDOM % 254 ) + 1 ))
+netmask 255.255.0.0
+

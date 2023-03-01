@@ -1,0 +1,1 @@
+KERNEL=="sd[b-z]*", ENV{ID_FS_TYPE}=="vfat", RUN+="/usr/bin/usbmount"

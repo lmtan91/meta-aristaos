@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#exec 3>&1 4>&2 >/tmp/usbdevinserted.log 2>&1
+
+set -x
+#set 2>1 >> /tmp/usbdevinfo
+
+if [ $ACTION == 'add' ]; then
+	echo "Add" >> /tmp/usbdevinfo
+	mkdir -p /media/${ID_FS_UUID}
+	mount ${DEVNAME} /media/${ID_FS_UUID}
+	#if [ -e "/media/${ID_FS_UUID}/autorun.sh" ]
+	#then
+	#	exec "media/${ID_FS_UUID}/autorun.sh"
+	#fi
+elif [ $ACTION == 'remove' ]; then
+	echo "remove" >> /tmp/usbdevinfo
+	umount -l /media/${ID_FS_UUID}
+else
+	echo "Unknown action" >> /tmp/usbdevinfo
+fi
+
+# restore stdout and stderr
+#exec 1>&3 2>&4

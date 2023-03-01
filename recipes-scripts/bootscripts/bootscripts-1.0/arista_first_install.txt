@@ -1,0 +1,20 @@
+
+echo == Set Network Addresses ==
+set serverip 10.10.1.91
+echo == Loading partition table to RAM ==
+dhcp 0x10800000 /mmcpart.img
+echo == Writing partition table to Internal Memory ==
+mmc dev 1
+mmc write 0x10800000 0x0 0x800
+mmc rescan
+echo == Loading arista rootfs into RAM ==
+dhcp 0x10800000 /arista-image-cgtqmx6.ext3
+echo == Writing arista rootfs to Internal Memory ==
+mmc dev 1
+mmc write 0x10800000 0x800 0x100000
+echo == Set Internal Memory as default ==
+set mmcdev 1
+set mmcpart 1
+saveenv
+echo == Reset system ==
+reset

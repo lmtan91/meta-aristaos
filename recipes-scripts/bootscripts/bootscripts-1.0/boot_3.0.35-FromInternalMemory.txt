@@ -1,0 +1,17 @@
+
+echo == Set GPIO Pin for Atmel Controller ==
+gpio set 130
+echo == Set root device based on presence of SD Card ==
+mmc dev 0
+if mmc rescan
+        then set device /dev/mmcblk1p1
+        echo == SD Card Present ==
+        else set device /dev/mmcblk0p1
+        echo == SD Card not Present ==
+fi
+echo == Set Kernel boot arguments ==
+set bootargs console=ttymxc1,115200 root=${device} rootwait rw fixrtc
+echo == Load uImage from Internal Memory and Boot ==
+mmc dev 1
+ext2load mmc 1:1 0x10800000 /boot/uImage
+bootm 0x10800000
