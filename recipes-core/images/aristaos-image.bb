@@ -12,4 +12,4 @@ IMAGE_ROOTFS_SIZE ?= "8192"
 IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "" ,d)}"
 
 IMAGE_INSTALL_append = " openjdk-8 nano nginx arista-avahi-configuration arista-usb-automount postgresql \
-		arista-first-time-install auto-run-once python-pip-installer init-ifupdown "
+		arista-first-time-install auto-run-once python-pip-installer init-ifupdown ntpd-service "
