@@ -13,3 +13,5 @@ do_install_append () {
 CONFFILES_${PN} += "${sysconfdir}/network/interfaces \
                     ${sysconfdir}/network/if-up.d/100-display-ip \
                     ${sysconfdir}/network/if-post-down.d/100-display-disconnected"
+
+RDEPENDS_${PN} += "bash"

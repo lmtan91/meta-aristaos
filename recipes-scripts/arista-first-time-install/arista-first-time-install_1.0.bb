@@ -24,3 +24,5 @@ do_install() {
 	install -d ${D}/install
 	install -m 0755 ${WORKDIR}/CarrierBoard.bin ${D}/install/CarrierBoard.bin
 }
+
+RDEPENDS_${PN} += "bash"

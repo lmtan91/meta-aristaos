@@ -28,4 +28,4 @@ do_install() {
 	install -m ${PERMISSIONS} 90-usb-storage.rules  ${D}/etc/udev/rules.d/
 }
 
-RDEPENDS-${PN} = "bash"
+RDEPENDS_${PN} = "bash"
