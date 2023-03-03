@@ -1,0 +1,7 @@
+# OVERRIDES-SLICE
+arista:
+  puid: AUUNFX
+  shared-secret: 2d62e803-f700-48bd-9742-437f2e0ce212
+  base-device-address: ws://localhost:8765
+  junction:
+    url: wss://junction-server.uat.practichem.com

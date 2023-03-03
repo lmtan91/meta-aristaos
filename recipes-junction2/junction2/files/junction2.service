@@ -1,0 +1,12 @@
+[Unit]
+Description=Junction
+
+[Service]
+WorkingDirectory=/var/www/arista
+ExecStart=java -Xmx1G -jar -Dspring.profiles.active=slice -Dspring.config.additional-location=/etc/arista/ arista-server.jar
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
