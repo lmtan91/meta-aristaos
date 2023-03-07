@@ -3,8 +3,6 @@ process as well as line-by-line analysis of memory consumption for python progra
 HOMEPAGE = "https://github.com/practichem/arista-protocolbridge.git"
 LICENSE = "CLOSED"
 
-RDEPENDS_${PN} = "python3-pyserial python3-tornado"
-
 LIC_FILES_CHKSUM = "file://README.md;md5=d3d754f8e1f07a15e65da588118bf793"
 
 SRC_URI = "git://git@github.com/practichem/arista-protocolbridge.git;protocol=ssh;branch=develop_setup"
@@ -14,30 +12,14 @@ S = "${WORKDIR}/git/"
 
 PV = "git${SRCPV}"
 
-# inherit setuptools3
-
-# DEPENDS = "python3"
-
-# export STAGING_INCDIR
-# export STAGING_LIBDIR
-# export BUILD_SYS
-# export HOST_SYS
-
-# do_compile_prepend () {
-# do_compile() {
-#     export IS_YOCTO="1"
-#     # cd ${S}/packages/practichem_device && python3 setup.py build
-#     for var in ${S}/packages/*/; do
-#         cd $var && python3 setup.py build
-#     done
-# }
-
 do_install_prepend () {
-    install -d -m 700 ${D}/home/root/
-    cp -R ${S}/protocolbridge ${D}/home/root/
+    install -d -m 700 ${D}/home/root/arista
+    cp -R ${S}/protocolbridge ${D}/home/root/arista
+    cp -R ${S}/utilities ${D}/home/root/arista
 }
 
 BBCLASSEXTEND = "native nativesdk"
 
 FILES_${PN} += "/home/root/*"
 FILES_${PN}-dev = "/home/root/*"
+ALLOW_EMPTY_${PN}="1"
