@@ -1,0 +1,11 @@
+[Unit]
+Description=protocolbridge
+
+[Service]
+ExecStart=
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

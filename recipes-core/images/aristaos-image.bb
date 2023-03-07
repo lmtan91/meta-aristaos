@@ -15,4 +15,4 @@ IMAGE_INSTALL_append = " openjdk-8 nano nginx arista-avahi-configuration arista-
 		junction2 python-pip-installer init-ifupdown ntpd-service lsb-release practichem-device python3 python3-pip \
 		as-ph-sensor atmelfirmwareflasher gilson-fc203b-collector practichem-biodetector practichem-carrier-board \
 		practichem-collector practichem-conformance-test-database practichem-fc203b practichem-gradient-former \
-		practichem-ph-sensor practichem-pump practichem-rotary-valve practichem-utility-board "
+		practichem-ph-sensor practichem-pump practichem-rotary-valve practichem-utility-board protocolbridge "
